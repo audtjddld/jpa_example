@@ -1,0 +1,155 @@
+
+	<div ng-controller="userWriteCtrl" class="form-group">
+		<h2>User Register</h2>
+
+		<form name="form" novalidate="novalidate" ng-submit="submitForm(form)"   >
+		<table class="table table-bordered">
+			<tr>
+				<th>
+					name
+				</th>
+				<td>
+					<input type="text"  name="name" ng-model="user.name" class="form-control"  title="name" placeHolder="input name" ng-maxlength="50" required="required" />
+					<p ng-show="form.name.$invalid &amp;&amp; form.name.$pristine" class="bg-warning">
+						이름을 정확하게 입력하세요.
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					age
+				</th>
+				<td>
+					<input type="text"  name="age" ng-model="user.age" class="form-control"  title="name" placeHolder="input age" ng-maxlength="50" required="required" />
+					<p ng-show="form.age.$invalid &amp;&amp; form.age.$pristine" class="bg-warning">
+						나이를 정확하게 입력하세요.
+					</p>			
+				</td>
+			</tr>		
+			<tr>
+				<th>
+					balance
+				</th>
+				<td>
+					<input type="text" name="balance" ng-model="user.balance" class="form-control" ng-class="form.balance.$invalid ? 'has-warning' : ''" title="balance" placeHolder="input balance" ng-maxlength="50" required="required"/>
+					<p ng-show="form.balance.$invalid" class="bg-warning">
+						재산을 입력하세요.
+					</p>					
+				</td>
+			</tr>
+			<tr>
+				<th>
+					eye color
+				</th>
+				<td>
+					<input type="text" name="guid"  ng-model="user.guid" class="form-control" ng-class="form.guid.$invalid ? 'has-warning' : '' " title="eye color"  placeHolder="input eyecolor" ng-maxlength="50" required="required"/>
+					<p ng-show="form.guid.$invalid" class="bg-warning">
+						guid를 입력하세요.
+					</p>					
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Gender
+				</th>
+				<td ng-init="user.gender == null || user.gender == '' ? user.gender = 'male' : ''">
+					<select class="form-control" ng-model="user.gender">
+						<option value="male" >male</option>
+						<option value="female">female</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					company
+				</th>
+				<td>
+					<input type="text"  name="company"  ng-model="user.company" class="form-control" ng-class="form.company.$invalid ? 'has-warning' : '' " title="company"  placeHolder="input company" ng-maxlength="50" required="required"/>
+					<p ng-show="form.company.$invalid" class="bg-warning">
+						회사를 정확히 입력하세요.
+					</p>					
+				</td>
+			</tr>		
+			<tr>
+				<th>
+					email
+				</th>
+				<td>
+					<input type="email"  name="email"  ng-model="user.email" class="form-control" ng-class="form.email.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " ng-maxlength="50" title="email id" ng-change="emailChk()"  required="required"/>
+					<div ng-model="emailResult">
+					</div>		
+					
+					<p ng-show="emailChk" class="bg-warning">
+						이미 등록되어있습니다.
+					</p>
+					<p ng-show="form.email.$invalid" class="bg-warning">
+						이메일을 입력하세요.
+					</p>								
+				</td>
+			</tr>		
+			<tr>
+				<th>
+					phone
+				</th>
+				<td>
+					<input type="text"  name="phone"  ng-model="user.phone" class="form-control" ng-class="form.phone.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="phone"  placeHolder="input phone number" ng-maxlength="50" required="required" />
+					<p ng-show="form.phone.$invalid" class="bg-warning">
+						전화번호를 입력하세요.
+					</p>					
+				</td>
+			</tr>
+			<tr>
+				<th>
+					address
+				</th>
+				<td>
+					<input type="text"  name="address1" ng-model="user.address1" class="form-control" ng-class="form.address1.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="address1"  placeHolder="input address" ng-maxlength="50"/> 
+					<input type="text"  name="address2"  ng-model="user.address2" class="form-control" ng-class="form.address2.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' "  title="address2"  placeHolder="input address" ng-maxlength="50"/>
+					<br />
+					<input type="text"  name="address3" ng-model="user.address3" class="form-control" ng-class="form.address3.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="address3"  placeHolder="input address" ng-maxlength="50"/>
+					<p ng-show="form.address1.$invalid || form.address2.$invalid || form.address3.$invalid" class="bg-warning">
+						주소를 정확히 입력하세요.
+					</p>					
+				</td>
+			</tr>
+			<tr>
+				<th>
+					about
+				</th>
+				<td>
+					<input type="text"  name="about" ng-model="user.about" class="form-control" ng-class="form.about.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' "  title="about"  placeHolder="input about" ng-maxlength="50"/>
+					<p ng-show="form.about.$invalid" class="bg-warning">
+						경력을 입력하세요.
+					</p>					
+				</td>
+			</tr>
+			<tr>
+				<th>
+					greeting
+				</th>
+				<td>
+					<input type="text" name="greeting" ng-model="user.greeting" class="form-control" ng-class="form.greeting.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="greeting"  placeHolder="input greeting" ng-maxlength="100" required="required"/>
+					<p ng-show="form.greeting.$invalid" class="bg-warning">
+						인삿말을 입력하세요.
+					</p>					
+				</td>
+			</tr>				
+			<tr>
+				<th>
+					tag
+				</th>
+				<td>
+					<input type="text" name="tag" ng-model="user.tag" class="form-control" title="tag" ng-class="form.tag.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' "  placeHolder="input tag" ng-maxlength="50"/>
+					<p ng-show="form.tag.$invalid" class="bg-warning">
+						태그를 정확하게 입력하세요.
+					</p>					
+				</td>
+			</tr>		
+
+		</table>
+		
+		<div class="text-right">
+			<button type="submit">등록</button>
+		</div>	
+		</form>
+	</div>

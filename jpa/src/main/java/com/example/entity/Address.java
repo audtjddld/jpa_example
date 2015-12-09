@@ -34,5 +34,10 @@ public class Address {
 	public void setAddress3(String address3) {
 		this.address3 = address3;
 	}
+
+	@Override
+	public String toString() {
+		return "Address [address1=" + address1 + ", address2=" + address2 + ", address3=" + address3 + "]";
+	}
 	
 }

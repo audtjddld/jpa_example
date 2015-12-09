@@ -19,7 +19,7 @@ myApp
 				}
 				
 				/**/
-				$http.get('/rest/user/list',{params:params}).success(
+				$http.get('/rest/users',{params:params}).success(
 						function(dataList) {
 							console.log('success');
 							console.log($scope.pagingInfo);
@@ -69,29 +69,68 @@ myApp
 			};
 		})
 	.controller('userWriteCtrl', function($scope, $stateParams, $http, $compile, $state){
-
+		
+		commonFnc($scope, $state);
+		
 		// 이메일 중복체크
-		function emailChk(){
-			if($scope.email.length > 0){
-				var emailAddr = $scope.email + '@' + $scope.emailDomain;
-				
-				$http.get('/rest/email/exist',{email: emailAddr}).success(function(length){
-					 if(length > 0){
-						 emailChk = true;
-						 emailTxt = '이미 등록되어있습니다.';
-						 
-					 }else{
-						 emailChk = true;
-						 emailTxt = '사용하실 수 있습니다.';
-					 }
-				});
-			}
+		$scope.emailChk = function (){
+			
+				if($scope.user.email != undefined && $scope.user.email.length > 3){
+					
+					$http.get('/rest/email/exist',{params : $scope.user}).success(function(length){
+						console.log(length);
+						 if(length > 0){
+							 $scope.duplicate = true;
+							 $scope.emailTxt = '이미 등록되어있습니다.';
+							 
+						 }else{
+							 $scope.duplicate = true;
+							 $scope.emailTxt = '사용하실 수 있습니다.';
+						 }
+					});
+					
+				}
 		}
+		
+		// 서브밋
+		$scope.submitForm = function(form) {
+			console.log('submit');
+			if(form.$valid == false){
+				alert('입력 오류');
+				return ;
+			}
+			
+			console.log($scope.user);
+			var params = angular.copy($scope.user);
+			
+			$http.post('/rest/users',params).success(function(){
+				
+				alert('등록되었습니다');
+				$state.go('userList');
+				
+			});
+		}
+		
+	})
+	// 상세조회
+	.controller('userViewCtrl',function($scope, $state, $http,$stateParams){
+		
+		commonFnc($scope, $state, $http);
+		
+		$http.get('/rest/users/' + $stateParams.id)
+							.success(function(data){
+								
+		    console.log(data);
+			$scope.user = data;
+			
+			// 친구목록 가져오기
+			userFriendList($scope);			
+		});
 		
 		// 친구 추가,삭제
 		$scope.addFriend = function(){
 			if($scope.user.friends.length < 5){
-				$scope.user.friends.push({friend:''});	
+				$scope.user.friends.push({friendName:''});	
 			}else{
 				alert('친구는 최고 5명까지 입력가능합니다.');
 				return;
@@ -117,20 +156,76 @@ myApp
 				alert('입력 오류');
 				return ;
 			}
-			
-			console.log($scope.user);
-			var params = angular.copy($scope.user);
-			
-			$http.get('/rest/user/save',{params:params}).success(function(){
-				
-				alert('등록되었습니다');
-				$state.go('user');
-				
-			});
-					
-			
-		}
-		
-	})
 
+			
+			console.log($scope.user.friends);
+			
+			
+			$http
+				.put('/rest/users/'+$scope.user._id +"/friends", $scope.friend)
+					.success(function(data){
+		
+				alert('등록되었습니다');
+				$scope.friend='';
+				userFriendList($scope);
+			});
+		}		
+
+		// 친구목록 가져오기
+		function userFriendList($scope){
+			$http.get('/rest/users/'+$scope.user._id+"/friends")
+					.success(function(data){
+				
+				$scope.user.friends = data;
+				
+			})
+		}
+	})
+	// 정보 수정
+	.controller('userUpdateCtrl',function($scope, $state, $http, $stateParams){
+		$http.get('/rest/users/' + $stateParams.id)
+							.success(function(data){
+								
+		    console.log(data);
+			$scope.user = data;
+		});		
+		
+		// 서브밋
+		$scope.submitForm = function(form) {
+			console.log('submit');
+			if(form.$valid == false){
+				alert('입력 오류');
+				return ;
+			}
+			
+			// 사용자 정보 수정
+			$http.put('/rest/users',$scope.user)
+				.success(function(){
+				
+				alert('수정하였습니다.');
+				
+				$state.go('userDetail',{id:$scope.user._id});
+			})
+		}			
+	})
 ;
+
+
+
+// 공통함수 선언
+function commonFnc($scope, $state, $http){
+	
+	$scope.list = function(){
+		$state.go('userList');
+	}
+	
+	// 삭제 
+	$scope.deleteUser = function(){
+		$http.get('/rest/users/' + $scope.user._id +"/delete")
+								.success(function(){
+			alert('삭제되었습니다.');
+			$state.go('userList');
+	   });		
+	}
+	
+}

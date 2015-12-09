@@ -8,7 +8,6 @@ myApp.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
 	// 사용자
 	.state('userList', {
-		// abstract: true,
 		url : "/user/list",
 		templateUrl : '/js/user/list.html',
 		controller : 'userListCtrl'
@@ -16,15 +15,20 @@ myApp.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 	})
 	// 상세보기
 	.state('userDetail', {
-		url : "^/user/detail/:id",
-		templateUrl : '/js/user/view.html'
-	// ,controller : ''
+		url : "^/user/detail/:id?page&offset",
+		templateUrl : '/js/user/view.html',
+		controller : 'userViewCtrl'
 	})
 	// 작성 페이지
 	.state('userWrite', {
 		url : "^/user/write",
-		templateUrl : '/js/user/write.html'
-		,controller : 'userWriteCtrl'
+		templateUrl : '/js/user/write.html',
+		controller : 'userWriteCtrl'
+	})
+	.state('userUpdate',{
+		url : "^/user/update/:id",
+		templateUrl : '/js/user/update.html',
+		controller : 'userUpdateCtrl'
 	})
 
 });

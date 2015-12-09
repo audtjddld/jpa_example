@@ -10,22 +10,20 @@
 			<th>회사</th>
 			<th>이메일</th>
 			<th>전화번호</th>
-			<th>활동상태</th>
 			<th>잔고</th>
 		</tr>
-		
+
 		<tr ng-if='data.content.length > 0' ng-repeat='d in data.content | offset: offset | limitTo : pagingInfo.pagePerCnt'>
-			<td>{{d.index + 1}}</td> 
-			<td><a ui-sref="userDetail({id : d._id, page : pagingInfo.page, offset : pagingInfo.offset , query:query})">{{d.name}}</a></td>
+			<td>{{d._id}}</td> 
+			<td><a ui-sref="userDetail({id : d._id, page : pagingInfo.page, offset : pagingInfo.offset })">{{d.name}}</a></td>
 			<td>{{d.gender}}</td>
 			<td>{{d.company}}</td>
 			<td>{{d.email}}</td>
 			<td>{{d.phone}}</td>
-			<td>{{d.isActive}}</td>
 			<td>{{d.balance}}</td>
 		</tr>
 		
-		<tr ng-if='data.content.length == undifined'>
+		<tr ng-if='data.content.length == 0'>
 			<td colspan="8">
 				<p class="text-center">등록된 데이터가 없습니다.</p>
 			</td>

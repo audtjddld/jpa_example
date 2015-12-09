@@ -1,9 +1,147 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<body>
+	<div ng-controller="userViewCtrl" class="form-group">
+		<h2>사용자 정보</h2>
 
-</body>
-</html>
+
+		<table class="table table-bordered">
+			<tr>
+				<th>
+					name
+				</th>
+				<td>
+					{{user.name}}
+				</td>
+			</tr>
+			<tr>
+				<th>
+					age
+				</th>
+				<td>
+					{{user.age}}
+				</td>
+			</tr>		
+			<tr>
+				<th>
+					balance
+				</th>
+				<td>
+					{{user.balance}}	
+				</td>
+			</tr>
+			<tr>
+				<th>
+					eye color
+				</th>
+				<td>
+					{{user.eyeColor}}				
+				</td>
+			</tr>
+			<tr>
+				<th>
+					Gender
+				</th>
+				<td ng-init="user.gender == null || user.gender == '' ? user.gender = 'male' : ''">
+					{{user.gender}}
+				</td>
+			</tr>
+			<tr>
+				<th>
+					company
+				</th>
+				<td>
+					{{user.company}}		
+				</td>
+			</tr>		
+			<tr>
+				<th>
+					email
+				</th>
+				<td ng-init="duplicate = false">
+					{{user.email}}							
+				</td>
+			</tr>		
+			<tr>
+				<th>
+					phone
+				</th>
+				<td>
+					{{user.phone}}					
+				</td>
+			</tr>
+			<tr>
+				<th>
+					address
+				</th>
+				<td>
+					{{user.address.address1}} - {{user.address.address2}} - {{user.address.address3}}
+				</td>
+			</tr>
+			<tr>
+				<th>
+					about
+				</th>
+				<td>
+					{{user.about}}
+				</td>
+			</tr>
+			<tr>
+				<th>
+					greeting
+				</th>
+				<td>
+					{{user.greeting}}					
+				</td>
+			</tr>				
+			<tr>
+				<th>
+					tag
+				</th>
+				<td>
+					{{user.tag}}		
+				</td>
+			</tr>		
+			<tr>
+				<th>
+					friend
+				</th>
+				<td>
+					<div ng-repeat ="f in user.friends">
+						<p>	
+							{{f.friendName}}
+						</p>
+					</div>
+					<p ng-show="user.friends.length == 0">
+						등록된 친구가 없습ㄴ디ㅏ.
+					</p>
+				</td>
+			</tr>
+		</table>
+		
+		<form name="form" novalidate="novalidate" ng-submit="submitForm(form)"   >		
+		<table class="table table-bordered">
+			<tr>
+				<th colspan="2">friend</th>
+			</tr>
+			<tr >
+				<td colspan="2" >
+					<div>
+						<input type="text" name="friend" ng-model="friend" maxlength="30" class="form-control" required/>
+					</div>
+					<div ng-show="form.friendNames.$invalid &amp;&amp; form.$submmited" class="bg-warning">
+						친구이름을 입력해주세요.
+					</div>
+					<button type="submit" class="btn btn-default">친구 등록</button>					
+				</td>
+			</tr>
+			<tr>
+			</tr>
+		</table>
+				
+		<div class="text-right">
+			<user-list-btn></user-list-btn>
+			<user-delete-btn></user-delete-btn>
+			<a href="" ui-sref="userUpdate({id:user._id})" class="btn btn-success">수정</a> 
+		</div>	
+		
+		</form>
+	</div>

@@ -14,6 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="user")
 public class User extends SearchVO {
@@ -22,12 +28,13 @@ public class User extends SearchVO {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	String _id;
 	
-	Integer index;
-	
 	String balance;
 	
+	//@Pattern(regexp="/[0-9]+/")
 	int age;
 	
+	@NotNull
+	@NotEmpty
 	String eyeColor;
 	
 	@Column(nullable=false)
@@ -36,11 +43,16 @@ public class User extends SearchVO {
 	@Enumerated(EnumType.STRING)
 	Gender gender;
 	
+	@NotNull
+	@NotEmpty
 	String company;
 	
+	@Email
 	@Column(unique=true)
 	String email;
 	
+	@NotNull
+	@NotEmpty
 	String phone;
 	
 	Address address;
@@ -56,14 +68,18 @@ public class User extends SearchVO {
 	
 	String tag;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="user")
 	List<UserFriend> friends;
+	
+	
+	
 	
 	@PrePersist
 	void prePersist() {
 		registerd = new Date();
 	}
-	
+	 
 	
 	
 	public String get_id() {
@@ -72,14 +88,6 @@ public class User extends SearchVO {
 
 	public void set_id(String _id) {
 		this._id = _id;
-	}
-
-	public Integer getIndex() {
-		return index;
-	}
-
-	public void setIndex(Integer index) {
-		this.index = index;
 	}
 
 	public String getBalance() {
@@ -192,6 +200,16 @@ public class User extends SearchVO {
 
 	public void setFriends(List<UserFriend> friends) {
 		this.friends = friends;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "User [_id=" + _id + ",  balance=" + balance + ", age=" + age + ", eyeColor="
+				+ eyeColor + ", name=" + name + ", gender=" + gender + ", company=" + company + ", email=" + email
+				+ ", phone=" + phone + ", address=" + address + ", about=" + about + ", registerd=" + registerd
+				+ ", greeting=" + greeting + ", tag=" + tag + ", friends=" + friends + "]";
 	}
 	
 }

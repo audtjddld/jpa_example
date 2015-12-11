@@ -10,7 +10,6 @@ myApp
 				var params = angular.copy($scope.pagingInfo);
 				console.log(params);
 				for(param in params) {
-					
 					if (param == 'page') {
 						params[param]--;
 						// 2015.12.03 추가
@@ -27,11 +26,9 @@ myApp
 							// console.log('reload ' + $scope.pagingInfo.page);
 							$scope.currentPage = $scope.pagingInfo.page;
 							$scope.pagePerCnt = $scope.pagingInfo.pagePerCnt;
-							
 							$scope.totalCnt = dataList.length;
 							$scope.offset = ($scope.currentPage -1)	* $scope.pagePerCnt;
 							// console.log($scope.pagingInfo);
-
 							// 로컬스토리지에 저장
 							$scope.data = dataList;
 							$location.search($scope.pagingInfo);
@@ -42,54 +39,43 @@ myApp
 
 			// 페이지 인포 객체가 없으면 한번 초기화
 			if ($scope.pagingInfo == undefined) {
-				
 				$scope.pagingInfo = {
 					page : 1,
 					pagePerCnt : 10
 				};
-				
 				// url 파라미터에 있는 내용에 따른 검색 파라미터 설정
-				
 				var obj = $location.search();
 				if(obj.page != undefined){
 					$scope.pagingInfo.page = obj.page;
 				}
-				
 				$scope.search();
 			}
 
 
 			// 페이징 버튼 클릭시 이벤트
 			$scope.pageChanged = function() {
-
 				// console.log('query ' + $scope.query);
 				$scope.pagingInfo.page = $scope.currentPage;
-				
 				$scope.search();
 			};
 		})
 	.controller('userWriteCtrl', function($scope, $stateParams, $http, $compile, $state){
-		
 		commonFnc($scope, $state);
-		
 		// 이메일 중복체크
 		$scope.emailChk = function (){
-			
-				if($scope.user.email != undefined && $scope.user.email.length > 3){
-					
-					$http.get('/rest/email/exist',{params : $scope.user}).success(function(length){
-						console.log(length);
-						 if(length > 0){
-							 $scope.duplicate = true;
-							 $scope.emailTxt = '이미 등록되어있습니다.';
-							 
-						 }else{
-							 $scope.duplicate = true;
-							 $scope.emailTxt = '사용하실 수 있습니다.';
-						 }
-					});
-					
-				}
+			if($scope.user.email != undefined && $scope.user.email.length > 3){
+				$http.get('/rest/email/exist',{params : $scope.user}).success(function(length){
+					console.log(length);
+					 if(length > 0){
+						 $scope.duplicate = true;
+						 $scope.emailTxt = '이미 등록되어있습니다.';
+						 
+					 }else{
+						 $scope.duplicate = true;
+						 $scope.emailTxt = '사용하실 수 있습니다.';
+					 }
+				});
+			}
 		}
 		
 		// 서브밋
@@ -99,15 +85,11 @@ myApp
 				alert('입력 오류');
 				return ;
 			}
-			
 			console.log($scope.user);
 			var params = angular.copy($scope.user);
-			
 			$http.post('/rest/users',params).success(function(){
-				
 				alert('등록되었습니다');
 				$state.go('userList');
-				
 			});
 		}
 		
@@ -127,27 +109,6 @@ myApp
 			userFriendList($scope);			
 		});
 		
-		// 친구 추가,삭제
-		$scope.addFriend = function(){
-			if($scope.user.friends.length < 5){
-				$scope.user.friends.push({friendName:''});	
-			}else{
-				alert('친구는 최고 5명까지 입력가능합니다.');
-				return;
-			}
-			
-		}
-		
-		// 친구 삭제 버튼
-		$scope.minusFriend = function(){
-			if($scope.user.friends.length >1 ){
-				$scope.user.friends.pop();	
-			}else{
-				alert('친구는 최소 1개는 입력해야됩니다.');
-				return;
-			}
-			
-		}
 		
 		// 서브밋
 		$scope.submitForm = function(form) {
@@ -156,10 +117,8 @@ myApp
 				alert('입력 오류');
 				return ;
 			}
-
 			
 			console.log($scope.user.friends);
-			
 			
 			$http
 				.put('/rest/users/'+$scope.user._id +"/friends", $scope.friend)
@@ -197,7 +156,6 @@ myApp
 				alert('입력 오류');
 				return ;
 			}
-			
 			// 사용자 정보 수정
 			$http.put('/rest/users',$scope.user)
 				.success(function(){
@@ -210,8 +168,6 @@ myApp
 	})
 ;
 
-
-
 // 공통함수 선언
 function commonFnc($scope, $state, $http){
 	
@@ -221,8 +177,7 @@ function commonFnc($scope, $state, $http){
 	
 	// 삭제 
 	$scope.deleteUser = function(){
-		$http.get('/rest/users/' + $scope.user._id +"/delete")
-								.success(function(){
+		$http.delete('/rest/users/' + $scope.user._id ).success(function(){
 			alert('삭제되었습니다.');
 			$state.go('userList');
 	   });		

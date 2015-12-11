@@ -21,67 +21,63 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity(name="user")
+@Entity(name = "user")
 public class User extends SearchVO {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	String _id;
-	
+
 	String balance;
-	
-	//@Pattern(regexp="/[0-9]+/")
+
+	// @Pattern(regexp="/[0-9]+/")
 	int age;
-	
+
 	@NotNull
 	@NotEmpty
 	String eyeColor;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	String name;
-	
+
 	@Enumerated(EnumType.STRING)
 	Gender gender;
-	
+
 	@NotNull
 	@NotEmpty
 	String company;
-	
+
 	@Email
-	@Column(unique=true)
+	@Column(unique = true)
 	String email;
-	
+
 	@NotNull
 	@NotEmpty
 	String phone;
-	
+
 	Address address;
-	
+
 	String about;
-	
+
 	// 자동 등록
-//	@Column(name="registerd", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)	
+	// @Column(name="registerd", columnDefinition="TIMESTAMP DEFAULT
+	// CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+	@Temporal(TemporalType.TIMESTAMP)
 	Date registerd;
 
 	String greeting;
-	
+
 	String tag;
-	
+
 	@JsonIgnore
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy = "user")
 	List<UserFriend> friends;
-	
-	
-	
-	
+
 	@PrePersist
 	void prePersist() {
 		registerd = new Date();
 	}
-	 
-	
-	
+
 	public String get_id() {
 		return _id;
 	}
@@ -202,14 +198,12 @@ public class User extends SearchVO {
 		this.friends = friends;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "User [_id=" + _id + ",  balance=" + balance + ", age=" + age + ", eyeColor="
-				+ eyeColor + ", name=" + name + ", gender=" + gender + ", company=" + company + ", email=" + email
-				+ ", phone=" + phone + ", address=" + address + ", about=" + about + ", registerd=" + registerd
-				+ ", greeting=" + greeting + ", tag=" + tag + ", friends=" + friends + "]";
+		return "User [_id=" + _id + ",  balance=" + balance + ", age=" + age + ", eyeColor=" + eyeColor + ", name="
+				+ name + ", gender=" + gender + ", company=" + company + ", email=" + email + ", phone=" + phone
+				+ ", address=" + address + ", about=" + about + ", registerd=" + registerd + ", greeting=" + greeting
+				+ ", tag=" + tag + ", friends=" + friends + "]";
 	}
-	
+
 }

@@ -20,10 +20,13 @@
 					age
 				</th>
 				<td>
-					<input type="text"  name="age" ng-model="user.age" class="form-control"  title="name" placeHolder="input age" ng-maxlength="3" maxlength="3" required="required" />
+					<input type="text"  name="age" ng-model="user.age" class="form-control"  title="name" placeHolder="input age" ng-maxlength="3" maxlength="3" required="required" ng-pattern="/^[0-9]+$/" />
+					<p ng-show="form.age.$error.pattern" class="bg-warning">
+						숫자형식으로만 입력이 가능합니다.
+					</p>					
 					<p ng-show="form.age.$invalid &amp;&amp; form.age.$submitted" class="bg-warning">
 						나이를 정확하게 입력하세요.
-					</p>			
+					</p>
 				</td>
 			</tr>		
 			<tr>
@@ -93,7 +96,7 @@
 				</th>
 				<td>
 					<input type="text"  name="phone"  ng-model="user.phone" class="form-control" ng-class="form.phone.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="phone"  placeHolder="input phone number" ng-maxlength="50" required="required" ng-pattern="/^[0-9]+$/"  />
-					<p ng-show="form.phone.$error.pattern">
+					<p ng-show="form.phone.$error.pattern" class="bg-warning">
 						숫자형식으로만 입력이 가능합니다.
 					</p>
 					<p ng-show="form.phone.$invalid &amp;&amp; form.name.$submitted" class="bg-warning">

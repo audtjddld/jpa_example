@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Address;
@@ -74,7 +75,7 @@ public class UserRestController {
 	@RequestMapping(value="/rest/users",method = RequestMethod.POST)
 	User user( @RequestBody @Valid User user,
 				BindingResult biResult ,
-				Address addr) throws Exception{
+				@RequestBody Address addr) throws Exception{
 		
 		System.out.println(user.toString());
 		System.out.println(addr.toString());
@@ -158,7 +159,7 @@ public class UserRestController {
 	 * 설명
 	 * @param _id
 	 */
-	@RequestMapping(value="/rest/users/{_id}/delete")
+	@RequestMapping(value="/rest/users/{_id}", method = RequestMethod.DELETE)
 	public void userDelete(@PathVariable String _id){
 		userService.userDelete(_id);
 		

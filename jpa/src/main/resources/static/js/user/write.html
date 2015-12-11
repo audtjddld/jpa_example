@@ -109,10 +109,10 @@
 					address
 				</th>
 				<td>
-					<input type="text"  name="address1" ng-model="user.address1" class="form-control" ng-class="form.address1.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="address1"  placeHolder="input address" ng-maxlength="50"/> 
-					<input type="text"  name="address2"  ng-model="user.address2" class="form-control" ng-class="form.address2.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' "  title="address2"  placeHolder="input address" ng-maxlength="50"/>
+					<input type="text"  name="address1" ng-model="user.address.address1" class="form-control" ng-class="form.address1.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="address1"  placeHolder="input address" ng-maxlength="50"/> 
+					<input type="text"  name="address2"  ng-model="user.address.address2" class="form-control" ng-class="form.address2.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' "  title="address2"  placeHolder="input address" ng-maxlength="50"/>
 					<br />
-					<input type="text"  name="address3" ng-model="user.address3" class="form-control" ng-class="form.address3.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="address3"  placeHolder="input address" ng-maxlength="50"/>
+					<input type="text"  name="address3" ng-model="user.address.address3" class="form-control" ng-class="form.address3.$invalid &amp;&amp; form.$submitted ? 'has-warning' : '' " title="address3"  placeHolder="input address" ng-maxlength="50"/>
 					<p ng-show="form.address1.$invalid || form.address2.$invalid || form.address3.$invalid" class="bg-warning">
 						주소를 정확히 입력하세요.
 					</p>					

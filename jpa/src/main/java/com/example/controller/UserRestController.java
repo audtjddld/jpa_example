@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.entity.Address;
@@ -74,17 +73,16 @@ public class UserRestController {
 	 */
 	@RequestMapping(value="/rest/users",method = RequestMethod.POST)
 	User user( @RequestBody @Valid User user,
-				BindingResult biResult ,
-				@RequestBody Address addr) throws Exception{
+				BindingResult biResult ) throws Exception{
 		
 		System.out.println(user.toString());
-		System.out.println(addr.toString());
+		//System.out.println(addr.toString());
 		
 		if(biResult.hasErrors()){
 			throw new Exception("입력값이 올바르지 않습니다.");
 		}
 		// 주소 저장
-		user.setAddress(addr);
+		//user.setAddress(addr);
 		// 정보 저장
 		userService.save(user);
 		

@@ -87,16 +87,7 @@ myApp
 			}
 			console.log($scope.user);
 			var params = angular.copy($scope.user);
-			
-			// 주소 담는 부분 추가
-			var addressArr = [];
-			
-			for(var prop in params){
-				if(prop == 'address1') addressArr.push(params[prop]);
-				if(prop == 'address2') addressArr.push(params[prop]);
-				if(prop == 'address3') addressArr.push(params[prop]);
-			}
-			
+
 			$http.post('/rest/users',params).success(function(){
 				alert('등록되었습니다');
 				$state.go('userList');

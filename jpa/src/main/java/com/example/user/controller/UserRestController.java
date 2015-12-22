@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.entity.User;
 import com.example.user.service.UserService;
-import com.example.user.vo.Address;
-import com.example.user.vo.User;
 import com.example.user.vo.UserFriend;
 import com.example.user.vo.UserVO;
 

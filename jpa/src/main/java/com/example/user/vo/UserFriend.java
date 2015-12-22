@@ -12,6 +12,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.example.entity.User;
+
 @Entity
 public class UserFriend {
 	

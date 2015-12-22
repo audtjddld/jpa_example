@@ -9,9 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.entity.User;
 import com.example.user.repository.UserFriendRepository;
 import com.example.user.repository.UserRepository;
-import com.example.user.vo.User;
 import com.example.user.vo.UserFriend;
 import com.example.user.vo.UserVO;
 

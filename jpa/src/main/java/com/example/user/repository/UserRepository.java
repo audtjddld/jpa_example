@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.user.vo.User;
+import com.example.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String>{
 	

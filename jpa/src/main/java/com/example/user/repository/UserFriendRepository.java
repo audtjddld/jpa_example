@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.user.vo.User;
+import com.example.entity.User;
 import com.example.user.vo.UserFriend;
-import com.example.user.vo.UserVO;
 
 /**
  * 친구

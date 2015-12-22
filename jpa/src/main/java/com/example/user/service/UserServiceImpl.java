@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.user.service;
 
 import java.util.List;
 
@@ -9,11 +9,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.entity.User;
-import com.example.entity.UserFriend;
-import com.example.entity.UserVO;
-import com.example.repository.UserFriendRepository;
-import com.example.repository.UserRepository;
+import com.example.user.repository.UserFriendRepository;
+import com.example.user.repository.UserRepository;
+import com.example.user.vo.User;
+import com.example.user.vo.UserFriend;
+import com.example.user.vo.UserVO;
 
 @Service
 public class UserServiceImpl implements UserService {

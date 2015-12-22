@@ -1,13 +1,13 @@
-package com.example.service;
+package com.example.user.service;
 
 import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.example.entity.User;
-import com.example.entity.UserFriend;
-import com.example.entity.UserVO;
+import com.example.user.vo.User;
+import com.example.user.vo.UserFriend;
+import com.example.user.vo.UserVO;
 
 public interface UserService {
 

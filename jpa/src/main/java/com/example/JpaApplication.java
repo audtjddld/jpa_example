@@ -1,21 +1,18 @@
 package com.example;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityScan;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.example.entity.Gender;
-import com.example.entity.User;
 
 @SpringBootApplication
 @EntityScan
 public class JpaApplication {
-/*/
+
+    public static void main(String[] args) {
+        SpringApplication.run(JpaApplication.class, args);
+    }
+    
+    /*/
 	@Autowired
 	EntityManager em;
 	
@@ -37,8 +34,5 @@ public class JpaApplication {
 		 
 		 em.persist(user);
 	}
-/**/	
-    public static void main(String[] args) {
-        SpringApplication.run(JpaApplication.class, args);
-    }
+/**/	    
 }

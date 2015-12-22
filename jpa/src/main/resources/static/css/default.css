@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+.mainVisual{
+	background-image : url('/images/main.jpg');
+	width:100%;
+	height:100%;
+}
+.mainBody{
+	
+	width:100%;
+	height:1080px;
+}

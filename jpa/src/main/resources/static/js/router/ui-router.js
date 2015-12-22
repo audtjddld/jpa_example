@@ -24,11 +24,17 @@ myApp.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 		url : "^/user/write",
 		templateUrl : '/js/user/write.html',
 		controller : 'userWriteCtrl'
-	})
-	.state('userUpdate',{
+	}).state('userUpdate', {
 		url : "^/user/update/:id",
 		templateUrl : '/js/user/update.html',
 		controller : 'userUpdateCtrl'
+	})
+
+	// 메인
+	.state('main', {
+		url : "/main",
+		templateUrl : '/js/main/index.html'
+
 	})
 
 });

@@ -16,6 +16,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -37,19 +38,11 @@ public class User extends SearchVO {
 	// @Pattern(regexp="/[0-9]+/")
 	int age;
 
-	@NotNull
-	@NotEmpty
-	String eyeColor;
-
 	@Column(nullable = false)
 	String name;
 
 	@Enumerated(EnumType.STRING)
 	Gender gender;
-
-	@NotNull
-	@NotEmpty
-	String company;
 
 	@Email
 	@Column(unique = true)
@@ -106,13 +99,6 @@ public class User extends SearchVO {
 		this.age = age;
 	}
 
-	public String getEyeColor() {
-		return eyeColor;
-	}
-
-	public void setEyeColor(String eyeColor) {
-		this.eyeColor = eyeColor;
-	}
 
 	public String getName() {
 		return name;
@@ -130,13 +116,6 @@ public class User extends SearchVO {
 		this.gender = gender;
 	}
 
-	public String getCompany() {
-		return company;
-	}
-
-	public void setCompany(String company) {
-		this.company = company;
-	}
 
 	public String getEmail() {
 		return email;
@@ -202,12 +181,8 @@ public class User extends SearchVO {
 		this.friends = friends;
 	}
 
-	@Override
-	public String toString() {
-		return "User [_id=" + _id + ",  balance=" + balance + ", age=" + age + ", eyeColor=" + eyeColor + ", name="
-				+ name + ", gender=" + gender + ", company=" + company + ", email=" + email + ", phone=" + phone
-				+ ", address=" + address + ", about=" + about + ", registerd=" + registerd + ", greeting=" + greeting
-				+ ", tag=" + tag + ", friends=" + friends + "]";
+	public static void main(String[] args) {
+		User user = new User();
+		System.out.println(ToStringBuilder.reflectionToString(user));
 	}
-
 }
